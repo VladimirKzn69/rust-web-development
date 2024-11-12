@@ -29,8 +29,6 @@ define_sql_function!{
     fn last_insert_rowid() -> Integer;
 }
 
-
-
 #[derive(Insertable, Debug)]
 #[diesel(table_name=products)]
 pub struct NewProduct {
