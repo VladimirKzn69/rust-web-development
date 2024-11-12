@@ -35,7 +35,6 @@ use diesel::sqlite::SqliteConnection;
 
 use serde::{Serialize, Deserialize};
 use shoe_store::schema::products; // Подключение к схеме
-// pub use serde_derive::{Deserialize, Serialize};
 
 #[derive(Queryable, Debug)]
 #[derive(serde::Serialize, Deserialize)]
@@ -50,7 +49,6 @@ pub fn list_products(conn: &mut SqliteConnection) -> Result<Vec<Product>, diesel
     // Загружаем все продукты из таблицы
     products::table.load::<Product>(conn)
 }
-
 
 use ::shoe_store::establish_connection_test;
 use diesel::result::Error;
