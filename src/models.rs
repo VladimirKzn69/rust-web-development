@@ -1,16 +1,14 @@
-// use diesel::Insertable;
+
 extern crate diesel;
 
 use crate::schema::*;
 use diesel::{Insertable, Identifiable, Queryable};
 use serde::{Serialize, Deserialize};
-// use shoe_store::schema::variants;
 
-#[macro_use]
-// extern crate diesel;
 
 use anyhow::Result;
 use diesel::sqlite::SqliteConnection;
+use diesel::result::Error;
 use diesel::ExpressionMethods;
 // use ::shoe_store::models::*;
 use diesel::Connection;
@@ -36,6 +34,26 @@ pub struct NewProduct {
     pub cost: f64,
     pub active: bool,
 }
+
+#[derive(Queryable, Debug)]
+#[derive(serde::Serialize, Deserialize)]
+pub struct Product {
+    pub id: Option<i32>,
+    pub name: String,
+    pub cost: f64,
+    pub active: bool,
+}
+/*
+#[derive(Queryable, Debug)]
+#[derive(serde::Serialize, Deserialize)]
+pub struct Product {
+    pub id: Option<i32>,
+    pub name: String,
+    pub cost: f64,
+    pub active: bool,
+}
+*/
+
 
 // #[derive(Identifiable, Queryable, Debug, Serialize, Deserialize)]
 #[derive(Identifiable, Queryable, Debug)]
@@ -77,15 +95,15 @@ use diesel::result::Error;
 use diesel::RunQueryDsl;
 */
 
-/* pub fn create_product(new_product: NewProduct, conn: &mut SqliteConnection) -> Result<usize, Error>  {
+pub fn create_product(new_product: NewProduct, conn: &mut SqliteConnection) -> Result<usize, Error>  {
     use crate::schema::products::dsl::*;
     // use crate::models::products::dsl::products;
     diesel::insert_into(products)
         .values(new_product)
         .execute(conn)
 }
-*/
-pub fn create_product(new_product: NewCompleteProduct, conn: &mut SqliteConnection) -> Result<i32>  {
+
+/* pub fn create_product(new_product: NewCompleteProduct, conn: &mut SqliteConnection) -> Result<i32>  {
     use crate::schema::products::dsl::products;
     use crate::schema::variants::dsl::*;
     use crate::schema::products_variants::dsl::*;
@@ -132,4 +150,4 @@ pub fn create_product(new_product: NewCompleteProduct, conn: &mut SqliteConnecti
         }
         Ok(last_product_id)
     })
-}
+} */
